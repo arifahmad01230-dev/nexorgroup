@@ -152,6 +152,33 @@ section{padding:96px 0}
 @keyframes sparkle{to{background-position:0 -192px}}
 }
 @media (prefers-reduced-motion:reduce){.head h2::after{width:72px}}
+.book{background:var(--surface);border-block:1px solid var(--line)}
+.book-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:start}
+.steps{list-style:none;padding:0;margin:30px 0 0;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding:16px 0 16px 54px;border-top:1px solid var(--line);color:var(--muted);font-size:16.5px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:12px;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--gold);display:grid;place-items:center;font:600 19px var(--serif);color:var(--gold)}
+.form{background:var(--bg);border:1px solid var(--line);border-radius:24px;padding:28px}
+.pick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 24px;padding:0;border:0;min-width:0}
+.pick legend{font-size:14px;font-weight:500;color:var(--muted);margin-bottom:10px;padding:0}
+.pick label{position:relative;display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;cursor:pointer;background:var(--surface);transition:border-color .2s,background .2s}
+.pick input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.pick label:has(input:checked){border-color:var(--gold-bright);background:color-mix(in srgb,var(--gold-bright) 16%,var(--surface))}
+.pick label:has(input:focus-visible){outline:2px solid var(--gold-bright);outline-offset:3px}
+.pick span{font-weight:600;font-size:15.5px}
+.pick b{font:600 22px var(--serif);color:var(--gold)}
+.fld{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+.fld .span{grid-column:1/-1}
+.form .l{display:block;font-size:14px;font-weight:500;color:var(--muted);margin:0 0 6px}
+.f{width:100%;padding:13px 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:400 16px var(--sans);margin-bottom:16px}
+textarea.f{resize:vertical}
+.sum{display:flex;justify-content:space-between;align-items:baseline;padding:14px 0;margin:2px 0 18px;border-block:1px solid var(--line);font-weight:500}
+.sum b{font:600 32px var(--serif);color:var(--gold)}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.acts .btn{justify-content:center}
+.bkmsg{display:none;margin-top:14px;font-size:14.5px;color:#B3261E}
+.ok{display:none;margin-top:16px;padding:14px 16px;border-radius:12px;background:color-mix(in srgb,var(--gold-bright) 18%,var(--surface));font-size:15px}
+@media (max-width:900px){.book-grid{grid-template-columns:1fr;gap:36px}}
+@media (max-width:520px){.pick,.fld,.acts{grid-template-columns:1fr}.form{padding:20px}}
 .price{padding:0;margin:0;max-width:820px}
 .price li{list-style:none;display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:22px 0;border-top:1px solid var(--line)}
 .price li:last-child{border-bottom:1px solid var(--line)}
@@ -178,6 +205,10 @@ section{padding:96px 0}
 @keyframes flow{to{stroke-dashoffset:-30}}
 }
 @media (prefers-reduced-motion:reduce){.travel{display:none}}
+.skyline{position:absolute;left:0;right:0;bottom:0;width:100%;height:auto;max-height:260px;fill:var(--gold-bright);opacity:.24;pointer-events:none}
+.ico{display:block;width:46px;height:46px;fill:none;stroke:var(--gold);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-bottom:12px}
+.med-list .ico{stroke:var(--gold-bright)}
+.med,.contact{background-image:linear-gradient(rgba(6,12,29,.9),rgba(10,18,42,.95)),var(--photo,none);background-size:cover;background-position:center}
 .sl-ctrl{display:flex;align-items:center;gap:14px;margin-top:22px;color:var(--muted);font-size:15px}
 .sl-ctrl button{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--gold);background:transparent;color:var(--ink);font-size:20px;cursor:pointer}
 .sl-ctrl button:hover{background:var(--gold-bright);color:var(--onGold)}
@@ -209,7 +240,7 @@ footer b{font:600 20px var(--serif);color:var(--gold-bright)}
       <span><b>NEXOR</b><small>GROUP</small></span>
     </a>
     <nav class="links" aria-label="Main">
-      <a href="#services">Services</a><a href="#visa">Visas</a><a href="#fees">Fees</a><a href="#medical">Medical tourism</a><a href="#about">About</a><a href="#contact">Contact</a>
+      <a href="#services">Services</a><a href="#visa">Visas</a><a href="#fees">Fees</a><a href="#book">Book</a><a href="#medical">Medical tourism</a><a href="#about">About</a><a href="#contact">Contact</a>
     </nav>
     <a class="btn btn-gold" href="https://wa.me/2348133304212" target="_blank" rel="noopener">
       <svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.1c-.2.6-1.300 1.200-1.800 1.200-.5.100-1 .2-3.300-.7-2.800-1.100-4.600-4-4.700-4.200-.1-.2-1.100-1.500-1.100-2.800s.7-2 1-2.300c.2-.3.500-.3.700-.3h.5c.2 0 .4 0 .6.500l.8 2c.1.200.1.400 0 .5l-.4.600c-.2.200-.3.300-.1.600.2.300.8 1.300 1.700 2 1.100 1 2 1.300 2.300 1.400.3.100.4.100.6-.1l.8-1c.2-.3.400-.2.600-.1l1.900.9c.3.100.5.200.5.300.1.200.1.800-.1 1.400z"/></svg>
@@ -219,6 +250,7 @@ footer b{font:600 20px var(--serif);color:var(--gold-bright)}
 
 <main id="top">
 <div class="hero"><svg class="plane" viewBox="0 0 36 24" aria-hidden="true"><path d="M2 12 L34 2 L26 12 L34 22 Z"/></svg>
+  <svg class="skyline" viewBox="0 0 1200 240" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><path d="M0 240V205C150 185 300 200 450 190S750 165 900 190 1100 185 1200 175V240Z"/><path d="M690 195L790 80 890 195ZM820 195L885 118 950 195ZM600 195L652 135 704 195Z"/><path d="M40 200v-62h30v62ZM80 200v-96h26v96ZM116 200v-50h24v50ZM150 200v-80h28v80ZM1010 190v-70h26v70ZM1046 190v-100h30v100ZM1086 190v-54h24v54Z"/></svg>
   <div class="wrap hero-grid">
     <div>
       <h1>Your global partner, from Nigeria to <span class="shine">the world.</span></h1>
@@ -227,6 +259,7 @@ footer b{font:600 20px var(--serif);color:var(--gold-bright)}
         <a class="btn btn-gold" href="https://wa.me/2348133304212" target="_blank" rel="noopener">
           <svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.1c-.2.6-1.300 1.200-1.800 1.200-.5.100-1 .2-3.300-.7-2.800-1.100-4.600-4-4.700-4.200-.1-.2-1.100-1.500-1.100-2.800s.7-2 1-2.300c.2-.3.500-.3.700-.3h.5c.2 0 .4 0 .6.500l.8 2c.1.200.1.400 0 .5l-.4.600c-.2.200-.3.300-.1.600.2.300.8 1.300 1.700 2 1.100 1 2 1.300 2.300 1.400.3.100.4.100.6-.1l.8-1c.2-.3.400-.2.600-.1l1.900.9c.3.100.5.200.5.300.1.200.1.800-.1 1.400z"/></svg>
           Talk to us today</a>
+        <a class="btn btn-line" href="#book">Book a service</a>
         <a class="btn btn-line" href="#services">See our services</a>
       </div>
     </div>
@@ -290,6 +323,41 @@ footer b{font:600 20px var(--serif);color:var(--gold-bright)}
       <li><div><h3>Full tourism</h3><p>Our complete tourism service</p></div><b>$600</b></li>
     </ul>
     <p class="note">These are Nexor Group’s agency fees. Message us and we’ll confirm what applies to your case.</p>
+  </div>
+</section>
+
+<section id="book" class="book">
+  <div class="wrap book-grid">
+    <div>
+      <h2>Book a service</h2>
+      <p class="lead" style="margin-top:14px">Choose what you need, add your details and send. Our team will reply to confirm your booking and the next steps.</p>
+      <ol class="steps"><li>Pick a service and fill in your details.</li><li>Send the booking on WhatsApp or by email.</li><li>We reply to confirm your booking and next steps.</li></ol>
+    </div>
+    <div class="form" id="bk">
+      <fieldset class="pick"><legend>Service</legend>
+        <label><input type="radio" name="svc" value="Admission" data-fee="$400" checked><span>Admission</span><b>$400</b></label>
+        <label><input type="radio" name="svc" value="Visa" data-fee="$200"><span>Visa</span><b>$200</b></label>
+        <label><input type="radio" name="svc" value="Property" data-fee="5%"><span>Property</span><b>5%</b></label>
+        <label><input type="radio" name="svc" value="Hospital appointment" data-fee="$350"><span>Hospital appointment</span><b>$350</b></label>
+        <label><input type="radio" name="svc" value="Full tourism" data-fee="$600"><span>Full tourism</span><b>$600</b></label>
+      </fieldset>
+      <div class="fld">
+        <div><label class="l" for="bn">Full name</label><input class="f" id="bn" type="text" autocomplete="name"></div>
+        <div><label class="l" for="bp">WhatsApp number</label><input class="f" id="bp" type="tel" autocomplete="tel" placeholder="+234 ..."></div>
+        <div><label class="l" for="be">Email (optional)</label><input class="f" id="be" type="email" autocomplete="email"></div>
+        <div><label class="l" for="bd">Destination</label><select class="f" id="bd"><option>Egypt</option><option>Saudi Arabia</option><option>Other</option></select></div>
+        <div><label class="l" for="bt">Preferred date</label><input class="f" id="bt" type="date"></div>
+        <div><label class="l" for="bq">Number of people</label><input class="f" id="bq" type="number" min="1" max="20" value="1"></div>
+        <div class="span"><label class="l" for="bm">Notes (optional)</label><textarea class="f" id="bm" rows="3"></textarea></div>
+      </div>
+      <div class="sum"><span>Agency fee</span><b id="fee">$400</b></div>
+      <div class="acts">
+        <button class="btn btn-gold" id="bwa" type="button">Book on WhatsApp</button>
+        <button class="btn btn-line" id="bem" type="button">Book by email</button>
+      </div>
+      <p class="bkmsg" id="bkerr" role="alert"></p>
+      <p class="ok" id="bkok" role="status"></p>
+    </div>
   </div>
 </section>
 
@@ -388,6 +456,26 @@ var sel='.head,.pillars div,.svc li,.price li,.country,.note,.med-list div,.abou
 document.querySelectorAll(sel).forEach(function(e){e.classList.add('rv');e.style.transitionDelay=(Array.prototype.indexOf.call(e.parentElement.children,e)%4*90)+'ms'});
 var o=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');o.unobserve(x.target)}})},{threshold:.15});
 document.querySelectorAll('.rv').forEach(function(e){o.observe(e)});})();
+(function(){var im=document.querySelector('.gallery img[alt^="A pyramid"]');
+if(im){var u='url("'+im.src+'")';document.querySelectorAll('.med,.contact').forEach(function(e){e.style.setProperty('--photo',u)})}
+var I=function(d){return '<svg class="ico" viewBox="0 0 44 44" aria-hidden="true"><path d="'+d+'"/></svg>'};
+var A=['M6 40V12h18v28M24 22h14v18M3 40h38M11 18h4M11 26h4M11 34h4M29 28h4M29 34h4','M22 8L2 18l20 10 20-10zM10 23v9c0 3 6 6 12 6s12-3 12-6v-9M42 18v12','M12 4h20a3 3 0 0 1 3 3v30a3 3 0 0 1-3 3H12a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3zM15 19a7 7 0 1 0 14 0 7 7 0 1 0-14 0M15 19h14M15 33h14','M4 22L40 6 30 38l-9-11zM21 27L40 6','M9 14h26a3 3 0 0 1 3 3v18a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3V17a3 3 0 0 1 3-3zM16 14V9h12v5M6 26h32','M5 38h34M9 30l9-9 7 6 12-15M30 12h7v7'];
+var B=['M18 6h8v12h12v8H26v12h-8V26H6v-8h12z',A[2],A[3],'M22 38S6 28 6 17a9 9 0 0 1 16-5 9 9 0 0 1 16 5c0 11-16 21-16 21z'];
+document.querySelectorAll('.svc li').forEach(function(l,i){if(A[i])l.insertAdjacentHTML('afterbegin',I(A[i]))});
+document.querySelectorAll('.med-list div').forEach(function(l,i){if(B[i])l.insertAdjacentHTML('afterbegin',I(B[i]))});})();
+(function(){var g=function(i){return document.getElementById(i)},f=g('fee'),t=g('bt'),q=function(){return document.querySelector('#bk input[name=svc]:checked')};
+var d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());t.min=d.toISOString().slice(0,10);
+document.querySelectorAll('#bk input[name=svc]').forEach(function(r){r.addEventListener('change',function(){f.textContent=r.dataset.fee})});
+function msg(){var n=g('bn').value.trim(),p=g('bp').value.trim(),e=g('bkerr');
+if(!n||p.replace(/\D/g,'').length<7){e.textContent='Please add your name and a valid WhatsApp number so we can reach you.';e.style.display='block';(!n?g('bn'):g('bp')).focus();return null}
+e.style.display='none';
+var s=q(),L=['Booking request: '+s.value+' (agency fee '+s.dataset.fee+')','Name: '+n,'WhatsApp: '+p],em=g('be').value.trim(),m=g('bm').value.trim();
+if(em)L.push('Email: '+em);L.push('Destination: '+g('bd').value);if(t.value)L.push('Preferred date: '+t.value);L.push('People: '+(g('bq').value||1));if(m)L.push('Notes: '+m);
+return L.join('\n')}
+function done(x){var o=g('bkok');o.textContent=x;o.style.display='block'}
+g('bwa').onclick=function(){var b=msg();if(!b)return;window.open('https://wa.me/2348133304212?text='+encodeURIComponent('Hello Nexor Group,\n\n'+b),'_blank','noopener');done('Your booking request is ready. Press send in WhatsApp to complete it. Your booking is confirmed once our team replies.')};
+g('bem').onclick=function(){var b=msg();if(!b)return;location.href='mailto:nexorgroup7@gmail.com?subject='+encodeURIComponent('Booking request: '+q().value)+'&body='+encodeURIComponent('Hello Nexor Group,\n\n'+b);done('Your email app should open with the booking ready to send. Your booking is confirmed once our team replies.')};
+})();
 document.getElementById('send').addEventListener('click',function(){
   var n=document.getElementById('n').value.trim(),i=document.getElementById('i').value,m=document.getElementById('m').value.trim(),e=document.getElementById('err');
   if(!n){e.style.display='block';document.getElementById('n').focus();return}
