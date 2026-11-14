@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book a service | Nexor Group</title>
+<meta name="description" content="Book travel, admission applications, hospital reservations and accommodation in Egypt and Saudi Arabia with Nexor Group.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FBF8F0;--surface:#fff;--ink:#0E1B3D;--muted:#4A5472;--gold:#A87A1F;--gold-bright:#C9A24A;--line:#E4DCC8;--err:#B3261E;
+  --serif:"Cormorant Garamond",Georgia,serif;--sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--sans)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold-bright);outline-offset:3px}
+header{background:var(--ink);color:#F5EFE0}
+.bar{max-width:1040px;margin:0 auto;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.brand{font:700 26px var(--serif);letter-spacing:.06em;text-decoration:none}
+.brand small{display:block;font:600 11px var(--sans);letter-spacing:.34em;color:var(--gold-bright);margin-top:-4px}
+.bar a.back{font-size:15px;color:#B8BFD6;text-decoration:none}
+main{max-width:1040px;margin:0 auto;padding:48px 24px 80px;display:grid;grid-template-columns:.7fr 1.3fr;gap:56px;align-items:start}
+h1{font:600 clamp(38px,5vw,56px)/1.05 var(--serif);margin:0 0 16px}
+.lead{color:var(--muted);font-size:18px}
+.steps{list-style:none;margin:28px 0 0;padding:0;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding:14px 0 14px 50px;border-top:1px solid var(--line);color:var(--muted);font-size:16px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:10px;width:32px;height:32px;border-radius:50%;border:1.5px solid var(--gold);display:grid;place-items:center;font:600 18px var(--serif);color:var(--gold)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:30px}
+fieldset{border:0;margin:0 0 22px;padding:0;min-width:0}
+legend{font-weight:600;font-size:15px;margin-bottom:10px;padding:0}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{position:relative;display:block;padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;cursor:pointer;background:var(--bg);transition:border-color .2s,background .2s}
+.tile input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.tile b{display:block;font:600 21px var(--serif)}
+.tile span{font-size:14px;color:var(--muted)}
+.tile:has(input:checked){border-color:var(--gold-bright);background:#FFF8E6}
+.tile:has(input:focus-visible){outline:2px solid var(--gold-bright);outline-offset:3px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.span{grid-column:1/-1}
+label.l{display:block;font-size:14px;font-weight:600;margin:0 0 6px}
+.req::after{content:" *";color:var(--gold)}
+.f{width:100%;padding:13px 14px;border-radius:12px;border:1.5px solid var(--line);background:#fff;color:var(--ink);font:400 16px var(--sans);margin-bottom:4px}
+.f[aria-invalid=true]{border-color:var(--err)}
+textarea.f{min-height:96px;resize:vertical}
+.fld{margin-bottom:14px}
+.help{font-size:13px;color:var(--muted)}
+.err{display:none;font-size:13.5px;color:var(--err);margin:2px 0 0}
+.fld.bad .err{display:block}
+.sect{border-top:1px solid var(--line);padding-top:20px;margin-top:6px}
+.consent{display:flex;gap:12px;align-items:flex-start;margin:8px 0 6px;font-size:15px}
+.consent input{width:20px;height:20px;margin-top:3px;accent-color:var(--gold)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 26px;border-radius:999px;border:0;background:var(--gold-bright);color:var(--ink);font:600 17px var(--sans);cursor:pointer;text-decoration:none}
+.btn:hover{filter:brightness(1.05)}
+.btn[disabled]{opacity:.6;cursor:wait}
+.btn.line{background:transparent;border:1.5px solid var(--gold);color:var(--ink)}
+.top-err{display:none;margin-top:16px;padding:14px 16px;border-radius:12px;background:#FDECEA;color:var(--err);font-size:15px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.done{text-align:center;padding:18px 6px}
+.ref{font:700 clamp(34px,6vw,50px) var(--serif);color:var(--gold);letter-spacing:.04em;margin:10px 0}
+.done p{color:var(--muted);max-width:46ch;margin:0 auto 14px}
+.acts{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:22px}
+[hidden]{display:none!important}
+@media (max-width:860px){main{grid-template-columns:1fr;gap:32px;padding-top:32px}}
+@media (max-width:520px){.tiles,.grid{grid-template-columns:1fr}.card{padding:20px}}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="index.html">NEXOR<small>GROUP</small></a><a class="back" href="index.html">Back to website</a></div></header>
+
+<main>
+  <section>
+    <h1>Book a service</h1>
+    <p class="lead">Tell us what you need. Our team reviews every request and replies to confirm the details and next steps. Submitting this form does not confirm a booking.</p>
+    <ol class="steps"><li>Choose a service and fill in your details.</li><li>You receive a booking reference number.</li><li>We review your request and contact you on WhatsApp or email.</li></ol>
+  </section>
+
+  <section class="card" aria-live="polite">
+    <form id="form" novalidate>
+      <fieldset><legend>What do you need?</legend>
+        <div class="tiles">
+          <label class="tile"><input type="radio" name="service" value="travel" checked><b>Travel</b><span>Flights, visas and trip planning</span></label>
+          <label class="tile"><input type="radio" name="service" value="admission"><b>Admission</b><span>University and school applications</span></label>
+          <label class="tile"><input type="radio" name="service" value="hospital"><b>Hospital reservation</b><span>Hospital and doctor appointments</span></label>
+          <label class="tile"><input type="radio" name="service" value="accommodation"><b>Accommodation</b><span>Hotels and apartments</span></label>
+        </div>
+      </fieldset>
+
+      <div class="grid">
+        <div class="fld"><label class="l req" for="destination">Destination</label>
+          <select class="f" id="destination" name="destination"><option value="Egypt">Egypt</option><option value="Saudi Arabia">Saudi Arabia</option></select><p class="err"></p></div>
+        <div class="fld"><label class="l req" for="travellers" id="lbl-travellers">Number of travellers</label>
+          <input class="f" id="travellers" name="travellers" type="number" min="1" max="50" value="1"><p class="err"></p></div>
+        <div class="fld"><label class="l req" for="full_name">Full name</label><input class="f" id="full_name" name="full_name" autocomplete="name"><p class="err"></p></div>
+        <div class="fld"><label class="l req" for="email">Email address</label><input class="f" id="email" name="email" type="email" autocomplete="email"><p class="err"></p></div>
+        <div class="fld"><label class="l req" for="whatsapp">WhatsApp number</label><input class="f" id="whatsapp" name="whatsapp" type="tel" autocomplete="tel" placeholder="+234 813 330 4212"><p class="help">Include the country code.</p><p class="err"></p></div>
+        <div class="fld"><label class="l" for="nationality">Nationality</label><input class="f" id="nationality" name="nationality" autocomplete="country-name"><p class="err"></p></div>
+        <div class="fld"><label class="l" for="preferred_date" id="lbl-date">Travel date</label><input class="f" id="preferred_date" name="preferred_date" type="date"><p class="err"></p></div>
+        <div class="fld" data-show="travel accommodation"><label class="l" for="return_date" id="lbl-return">Return date</label><input class="f" id="return_date" name="return_date" type="date"><p class="err"></p></div>
+      </div>
+
+      <div class="sect grid" data-show="travel">
+        <div class="fld"><label class="l req" for="d-departure_location">Departure city or country</label><input class="f" id="d-departure_location" name="departure_location"><p class="err"></p></div>
+        <div class="fld span"><label class="l" for="d-accommodation_requirements">Accommodation requirements</label><textarea class="f" id="d-accommodation_requirements" name="accommodation_requirements" placeholder="For example: 2 rooms, near the city centre"></textarea><p class="err"></p></div>
+      </div>
+      <div class="sect grid" data-show="admission" hidden>
+        <div class="fld"><label class="l req" for="d-institution">Preferred institution</label><input class="f" id="d-institution" name="institution"><p class="err"></p></div>
+        <div class="fld"><label class="l req" for="d-programme">Course or programme</label><input class="f" id="d-programme" name="programme"><p class="err"></p></div>
+        <div class="fld"><label class="l" for="d-study_level">Study level</label><select class="f" id="d-study_level" name="study_level"><option value="">Select</option><option>Foundation</option><option>Diploma</option><option>Bachelor's</option><option>Master's</option><option>PhD</option><option>Other</option></select><p class="err"></p></div>
+        <div class="fld"><label class="l" for="d-intake">Preferred intake</label><input class="f" id="d-intake" name="intake" placeholder="For example: September 2027"><p class="err"></p></div>
+        <div class="fld span"><label class="l" for="d-applicant_details">Applicant details</label><textarea class="f" id="d-applicant_details" name="applicant_details" placeholder="Applicant name, current qualification, grades"></textarea><p class="err"></p></div>
+      </div>
+      <div class="sect grid" data-show="hospital" hidden>
+        <div class="fld"><label class="l req" for="d-facility">Preferred hospital or facility</label><input class="f" id="d-facility" name="facility"><p class="err"></p></div>
+        <div class="fld"><label class="l req" for="d-department">Department or specialty</label><input class="f" id="d-department" name="department" placeholder="For example: Cardiology"><p class="err"></p></div>
+        <div class="fld"><label class="l" for="d-appointment_type">Appointment type</label><select class="f" id="d-appointment_type" name="appointment_type"><option value="">Select</option><option>Consultation</option><option>Follow-up</option><option>Second opinion</option><option>Procedure consultation</option></select><p class="err"></p></div>
+        <div class="fld"><label class="l" for="d-patient_contact">Patient contact details</label><input class="f" id="d-patient_contact" name="patient_contact" placeholder="Name and phone number of the patient"><p class="err"></p></div>
+        <p class="help span">Please do not enter medical records or health details here. If we need documents, we will tell you how to send them safely.</p>
+      </div>
+      <div class="sect grid" data-show="accommodation" hidden>
+        <div class="fld"><label class="l req" for="d-city">City</label><input class="f" id="d-city" name="city" placeholder="For example: Cairo"><p class="err"></p></div>
+        <div class="fld"><label class="l" for="d-room_type">Room type</label><input class="f" id="d-room_type" name="room_type" placeholder="For example: 2-bedroom apartment"><p class="err"></p></div>
+      </div>
+
+      <div class="fld sect"><label class="l" for="additional_info">Additional information</label><textarea class="f" id="additional_info" name="additional_info"></textarea><p class="err"></p></div>
+
+      <div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
+
+      <div class="fld"><label class="consent"><input type="checkbox" id="privacy_consent" name="privacy_consent"><span>I agree that Nexor Group may use these details to process my request and contact me about it.</span></label><p class="err"></p></div>
+
+      <button class="btn" id="submit" type="submit">Submit booking request</button>
+      <div class="top-err" id="top-err" role="alert"></div>
+    </form>
+
+    <div class="done" id="done" hidden>
+      <p style="margin:0">Request received. Your booking reference is</p>
+      <div class="ref" id="ref"></div>
+      <p>Please keep this number. Our team will review your request and contact you on WhatsApp or by email. Your booking is confirmed only when we tell you so.</p>
+      <div class="acts"><a class="btn" id="wa" target="_blank" rel="noopener">Message us on WhatsApp</a><a class="btn line" href="booking.html">Make another request</a></div>
+    </div>
+  </section>
+</main>
+
+<script>
+// Public values only. The publishable key is designed to be in the browser; never put a secret key here.
+var SUPABASE_URL = "https://ebwmfcioneqbuttdblmm.supabase.co";
+var SUPABASE_KEY = "sb_publishable_7v2BqPBw6CKF3AIpwSPlww_ahIy3erU";
+var ENDPOINT = SUPABASE_URL + "/functions/v1/submit-booking";
+var WA_NUMBER = "2348133304212";
+
+var form = document.getElementById("form");
+var idemKey = (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(16).slice(2)) + "-" + Date.now();
+var LABELS = {
+  travel: ["Number of travellers", "Travel date"],
+  admission: ["Number of applicants", "Preferred start date"],
+  hospital: ["Number of patients", "Preferred appointment date"],
+  accommodation: ["Number of guests", "Check-in date"]
+};
+var DETAIL_NAMES = {
+  travel: ["departure_location", "accommodation_requirements"],
+  admission: ["institution", "programme", "study_level", "intake", "applicant_details"],
+  hospital: ["facility", "department", "appointment_type", "patient_contact"],
+  accommodation: ["city", "room_type"]
+};
+var REQUIRED = { travel: ["departure_location"], admission: ["institution", "programme"], hospital: ["facility", "department"], accommodation: ["city"] };
+
+function service() { return form.elements.service.value; }
+function el(id) { return document.getElementById(id); }
+var today = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+el("preferred_date").min = today; el("return_date").min = today;
+
+function applyService() {
+  var s = service();
+  document.querySelectorAll("[data-show]").forEach(function (n) {
+    var on = n.getAttribute("data-show").split(" ").indexOf(s) > -1;
+    n.hidden = !on;
+    n.querySelectorAll("input,select,textarea").forEach(function (i) { i.disabled = !on; });
+  });
+  el("lbl-travellers").textContent = LABELS[s][0];
+  el("lbl-date").textContent = LABELS[s][1];
+  el("lbl-return").textContent = s === "accommodation" ? "Check-out date" : "Return date";
+  document.querySelectorAll(".sect[data-show] label.l").forEach(function (l) { l.classList.remove("req"); });
+  (REQUIRED[s] || []).forEach(function (k) { var l = document.querySelector('label[for="d-' + k + '"]'); if (l) l.classList.add("req"); });
+}
+form.addEventListener("change", function (e) { if (e.target.name === "service") applyService(); });
+applyService();
+
+function setErr(input, msg) {
+  var box = input.closest(".fld");
+  if (!box) return;
+  var p = box.querySelector(".err");
+  box.classList.toggle("bad", !!msg);
+  input.setAttribute("aria-invalid", msg ? "true" : "false");
+  if (p) p.textContent = msg || "";
+}
+function field(name) { return form.elements[name] || el("d-" + name); }
+function clearErrors() { form.querySelectorAll(".fld").forEach(function (b) { b.classList.remove("bad"); }); form.querySelectorAll("[aria-invalid]").forEach(function (i) { i.setAttribute("aria-invalid", "false"); }); el("top-err").style.display = "none"; }
+
+function validate() {
+  var bad = [], s = service();
+  function need(name, msg) { var f = field(name); if (!f.value.trim()) { setErr(f, msg); bad.push(f); } }
+  need("full_name", "Enter your full name");
+  var email = field("email"); if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim())) { setErr(email, "Enter a valid email address"); bad.push(email); }
+  var wa = field("whatsapp"); if (!/^\+[0-9]{7,15}$/.test(wa.value.replace(/[\s().-]/g, ""))) { setErr(wa, "Include the country code, for example +234..."); bad.push(wa); }
+  var n = parseInt(field("travellers").value, 10); if (!(n >= 1 && n <= 50)) { setErr(field("travellers"), "Enter a number from 1 to 50"); bad.push(field("travellers")); }
+  var pd = field("preferred_date"); if (pd.value && pd.value < today) { setErr(pd, "Choose a date that is not in the past"); bad.push(pd); }
+  var rd = field("return_date"); if (!rd.disabled && rd.value && rd.value < (pd.value || today)) { setErr(rd, "This date must be after the first date"); bad.push(rd); }
+  (REQUIRED[s] || []).forEach(function (k) { need(k, "This field is required"); });
+  var c = el("privacy_consent"); if (!c.checked) { setErr(c, "Please agree to continue"); bad.push(c); }
+  return bad;
+}
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  clearErrors();
+  var bad = validate();
+  if (bad.length) { bad[0].focus(); return; }
+  var s = service(), details = {};
+  DETAIL_NAMES[s].forEach(function (k) { var v = field(k).value.trim(); if (v) details[k] = v; });
+  var rd = field("return_date");
+  var payload = {
+    service: s, destination: field("destination").value,
+    full_name: field("full_name").value.trim(), email: field("email").value.trim(),
+    whatsapp: field("whatsapp").value.trim(), nationality: field("nationality").value.trim(),
+    preferred_date: field("preferred_date").value || null,
+    return_date: (!rd.disabled && rd.value) ? rd.value : null,
+    travellers: parseInt(field("travellers").value, 10),
+    additional_info: field("additional_info").value.trim(),
+    details: details, privacy_consent: true, idempotency_key: idemKey,
+    website: form.elements.website.value
+  };
+  var btn = el("submit"); btn.disabled = true; btn.textContent = "Sending...";
+  var ctl = new AbortController(), timer = setTimeout(function () { ctl.abort(); }, 20000);
+  fetch(ENDPOINT, { method: "POST", signal: ctl.signal, headers: { "Content-Type": "application/json", apikey: SUPABASE_KEY }, body: JSON.stringify(payload) })
+    .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { return { ok: r.ok, status: r.status, d: d }; }); })
+    .then(function (res) {
+      if (res.ok && res.d.reference) { showDone(res.d.reference, s); return; }
+      if (res.status === 400 && res.d.fields) {
+        var first = null;
+        Object.keys(res.d.fields).forEach(function (k) { var f = field(k.replace("details.", "")); if (f) { setErr(f, res.d.fields[k]); first = first || f; } });
+        if (first) { first.focus(); } else { showTop(res.d.error); }
+        return;
+      }
+      showTop(res.d.error || "Something went wrong. Please try again or contact us on WhatsApp.");
+    })
+    .catch(function () { showTop("We could not reach the server. Please check your connection and try again, or contact us on WhatsApp."); })
+    .finally(function () { clearTimeout(timer); btn.disabled = false; btn.textContent = "Submit booking request"; });
+});
+
+function showTop(msg) { var t = el("top-err"); t.textContent = msg; t.style.display = "block"; }
+function showDone(ref, s) {
+  el("ref").textContent = ref;
+  el("wa").href = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent("Hello Nexor Group, I submitted a booking request. My reference is " + ref + ".");
+  form.hidden = true; el("done").hidden = false;
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+</script>
+</body>
+</html>
