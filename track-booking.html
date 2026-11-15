@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Track your booking | Nexor Group</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FBF8F0;--surface:#fff;--ink:#0E1B3D;--muted:#4A5472;--gold:#A87A1F;--gold-bright:#C9A24A;--line:#E4DCC8;--err:#B3261E;
+  --serif:"Cormorant Garamond",Georgia,serif;--sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--sans)}
+:focus-visible{outline:2px solid var(--gold-bright);outline-offset:3px}
+[hidden]{display:none!important}
+header{background:var(--ink);color:#F5EFE0}
+.bar{max-width:760px;margin:0 auto;padding:18px 24px;display:flex;justify-content:space-between;align-items:center}
+.brand{font:700 26px var(--serif);letter-spacing:.06em;text-decoration:none;color:inherit}
+.brand small{display:block;font:600 11px var(--sans);letter-spacing:.34em;color:var(--gold-bright);margin-top:-4px}
+.bar a.back{font-size:15px;color:#B8BFD6;text-decoration:none}
+main{max-width:760px;margin:0 auto;padding:44px 24px 80px}
+h1{font:600 clamp(36px,6vw,52px)/1.05 var(--serif);margin:0 0 12px}
+.lead{color:var(--muted);margin:0 0 26px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:28px}
+label.l{display:block;font-size:14px;font-weight:600;margin:0 0 6px}
+.f{width:100%;padding:13px 14px;border-radius:12px;border:1.5px solid var(--line);font:inherit;margin-bottom:16px}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 26px;border-radius:999px;border:0;background:var(--gold-bright);color:var(--ink);font:600 17px var(--sans);cursor:pointer;text-decoration:none}
+.btn.line{background:transparent;border:1.5px solid var(--gold)}
+.btn[disabled]{opacity:.6;cursor:wait}
+.err{color:var(--err);margin:14px 0 0}
+.top{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start}
+.ref{font:700 clamp(30px,5vw,42px)/1 var(--serif);color:var(--gold)}
+.pill{display:inline-block;padding:6px 16px;border-radius:999px;font-weight:600;background:#EEE8D6}
+.pill.new_request{background:#FFF1C7}.pill.under_review,.pill.processing{background:#DCE6FF}.pill.more_info_required,.pill.awaiting_payment{background:#FFE0CC}
+.pill.confirmed,.pill.completed,.pill.payment_received{background:#D5F0E0}.pill.rejected,.pill.cancelled{background:#F7D6D3}
+.kv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px 20px;margin:22px 0}
+.kv span{display:block;font-size:13px;color:var(--muted)}
+.next{background:#FFF8E6;border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-bottom:22px}
+h2{font:600 26px var(--serif);margin:0 0 10px}
+ul.tl{list-style:none;margin:0;padding:0 0 0 22px;border-left:2px solid var(--line)}
+ul.tl li{position:relative;padding:0 0 16px 14px}
+ul.tl li::before{content:"";position:absolute;left:-30px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--gold-bright);border:2px solid #fff}
+ul.tl li small{display:block;color:var(--muted);font-size:14px}
+.foot{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:20px}
+.upd{color:var(--muted);font-size:14px}
+@media (max-width:560px){.kv{grid-template-columns:1fr 1fr}.card{padding:20px}}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="index.html">NEXOR<small>GROUP</small></a><a class="back" href="index.html">Back to website</a></div></header>
+<main>
+  <h1>Track your booking</h1>
+  <p class="lead">Enter your booking reference and the email address you used when you booked.</p>
+
+  <div class="card" id="formcard">
+    <label class="l" for="ref">Booking reference</label>
+    <input class="f" id="ref" placeholder="NXG-2026-00001" autocomplete="off" autocapitalize="characters">
+    <label class="l" for="em">Email address</label>
+    <input class="f" id="em" type="email" autocomplete="email">
+    <button class="btn" id="go" type="button">Track booking</button>
+    <p class="err" id="err" role="alert" hidden></p>
+  </div>
+
+  <div class="card" id="result" hidden aria-live="polite">
+    <div class="top"><div><span style="font-size:13px;color:var(--muted)">Booking reference</span><div class="ref" id="r-ref"></div></div><span class="pill" id="r-status"></span></div>
+    <div class="kv"><div><span>Service</span><b id="r-service"></b></div><div><span>Destination</span><b id="r-dest"></b></div><div><span>Submitted</span><b id="r-sub"></b></div></div>
+    <div class="next"><b>Next steps</b><br><span id="r-next"></span></div>
+    <h2>Status history</h2>
+    <ul class="tl" id="r-hist"></ul>
+    <div class="foot"><button class="btn line" id="refresh" type="button">Refresh status</button><span class="upd" id="upd"></span><a class="btn line" id="wa" target="_blank" rel="noopener">Message us on WhatsApp</a></div>
+    <div class="foot"><button class="btn line" id="again" type="button" style="font-size:15px;padding:10px 18px">Track a different booking</button></div>
+  </div>
+</main>
+<script>
+// Public values only. Customers can see only their own booking, and only after matching reference and email.
+var ENDPOINT = "https://ebwmfcioneqbuttdblmm.supabase.co/functions/v1/track-booking";
+var KEY = "sb_publishable_7v2BqPBw6CKF3AIpwSPlww_ahIy3erU";
+var WA = "2348133304212";
+var LABEL = { new_request: "New Request", under_review: "Under Review", more_info_required: "More Information Required", awaiting_payment: "Awaiting Payment", payment_received: "Payment Received", processing: "Processing", confirmed: "Confirmed", completed: "Completed", rejected: "Rejected", cancelled: "Cancelled" };
+var SERVICE = { travel: "Travel", admission: "Admission", hospital: "Hospital reservation", accommodation: "Accommodation" };
+var $ = function (id) { return document.getElementById(id); };
+var current = null, timer = null;
+function fmt(d) { var x = new Date(d); return isNaN(x) ? "" : x.toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" }); }
+function text(el, v) { el.textContent = v == null ? "" : v; }
+
+function lookup(ref, email, silent) {
+  var btn = $("go"); if (!silent) { btn.disabled = true; $("err").hidden = true; }
+  return fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", apikey: KEY }, body: JSON.stringify({ reference: ref, email: email }) })
+    .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { return { ok: r.ok, d: d }; }); })
+    .then(function (res) {
+      if (!res.ok) { if (!silent) { text($("err"), res.d.error || "Something went wrong. Please try again."); $("err").hidden = false; } return; }
+      current = { ref: ref, email: email }; show(res.d);
+    })
+    .catch(function () { if (!silent) { text($("err"), "We could not reach the server. Please check your connection and try again."); $("err").hidden = false; } })
+    .finally(function () { btn.disabled = false; });
+}
+function show(d) {
+  text($("r-ref"), d.reference); text($("r-status"), LABEL[d.status] || d.status); $("r-status").className = "pill " + d.status;
+  text($("r-service"), SERVICE[d.service] || d.service); text($("r-dest"), d.destination); text($("r-sub"), fmt(d.submitted_at));
+  text($("r-next"), d.next_steps || "");
+  var ul = $("r-hist"); ul.textContent = "";
+  (d.history || []).forEach(function (h) {
+    var li = document.createElement("li"), b = document.createElement("b"), s = document.createElement("small");
+    b.textContent = LABEL[h.status] || h.status; s.textContent = fmt(h.at); li.appendChild(b); li.appendChild(s); ul.appendChild(li);
+  });
+  $("wa").href = "https://wa.me/" + WA + "?text=" + encodeURIComponent("Hello Nexor Group, my booking reference is " + d.reference + ".");
+  text($("upd"), "Updated " + new Date().toLocaleTimeString("en-GB", { timeStyle: "short" }));
+  $("formcard").hidden = true; $("result").hidden = false;
+  clearInterval(timer); timer = setInterval(function () { if (!document.hidden && current) lookup(current.ref, current.email, true); }, 120000);
+}
+$("go").onclick = function () {
+  var ref = $("ref").value.trim().toUpperCase(), em = $("em").value.trim();
+  if (!ref || !em) { text($("err"), "Enter both your booking reference and your email address."); $("err").hidden = false; return; }
+  lookup(ref, em, false);
+};
+$("em").addEventListener("keydown", function (e) { if (e.key === "Enter") $("go").click(); });
+$("refresh").onclick = function () { if (current) lookup(current.ref, current.email, true); };
+$("again").onclick = function () { current = null; clearInterval(timer); $("result").hidden = true; $("formcard").hidden = false; $("em").value = ""; };
+</script>
+</body>
+</html>
